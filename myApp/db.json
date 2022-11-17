@@ -1,0 +1,62 @@
+{
+  "country": [
+    {
+      "name": "India",
+      "id": 1
+    }
+  ],
+  "state": [
+    {
+      "name": "Gujrat",
+      "countryId": 1,
+      "id": 1
+    },
+    {
+      "name": "Aasam",
+      "countryId": 1,
+      "id": 2
+    },
+    {
+      "name": "Manchester",
+      "countryId": 2,
+      "id": 3
+    },
+    {
+      "name": "Delhi",
+      "countryId": 1,
+      "id": 4
+    },
+    {
+      "name": "Belfast",
+      "countryId": 2,
+      "id": 5
+    }
+  ],
+  "cities": [
+    {
+      "cityName": "Valsad",
+      "stateId": 1,
+      "id": 1
+    },
+    {
+      "cityName": "Bilimora",
+      "stateId": 1,
+      "id": 2
+    },
+    {
+      "cityName": "Guwahati",
+      "stateId": 2,
+      "id": 3
+    },
+    {
+      "cityName": "Aberdeen ",
+      "stateId": 3,
+      "id": 4
+    },
+    {
+      "cityName": "London ",
+      "stateId": 5,
+      "id": 5
+    }
+  ]
+}

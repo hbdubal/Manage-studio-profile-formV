@@ -1,0 +1,147 @@
+<section>
+  <div class="container-fluid">
+    <!--Start: Studio-Details-Form -->
+    <div class="studio-details">
+      <div class="studio_heading">
+        <h2 class="text-primary">studio details</h2>
+      </div>
+      <!-- Start:Form With Validation -->
+      <div class="studioForm">
+        <form [formGroup]="studioProfileForm" (ngSubmit)="submit()">
+          <!-- Start:First-row of input field -->
+          <div class="row mb-4">
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:StudioName input field -->
+                <label class="form-label">Studio name</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="studioName" placeholder="Studio Name" />
+                <div
+                  *ngIf="validator['studioName'].invalid &&  (isSubmitted || validator['studioName'].dirty) || validator['studioName'].touched">
+                  <span class="text-danger" *ngIf="validator['studioName'].errors?.['required']">This field is
+                    required*</span>
+                  <span class="text-danger" *ngIf="(validator['studioName'].errors?.['maxlength'])">Studio name must be
+                    less than 30
+                    characters*</span>
+                  <span class="text-danger" *ngIf="validator['studioName'].errors?.['pattern']">valid name*</span>
+                </div>
+                <!-- End:StudioName input field -->
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:Address input field -->
+                <label class="form-label">Address</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="studioAddress" placeholder="Address" />
+                <div
+                  *ngIf="validator['studioAddress'].invalid &&  (isSubmitted || validator['studioAddress'].dirty) || validator['studioAddress'].touched">
+                  <span class="text-danger" *ngIf="validator['studioAddress'].errors?.['required']">This field is
+                    required*</span>
+                  <span class="text-danger" *ngIf="(validator['studioAddress'].errors?.['maxlength'])">Studio name must
+                    be
+                    less than 250
+                    characters*</span>
+                  <span class="text-danger" *ngIf="validator['studioAddress'].errors?.['pattern']">valid name*</span>
+                </div>
+                <!-- End:Address input field -->
+              </div>
+            </div>
+          </div>
+          <!-- Start:Second-row of input field -->
+          <div class="row mb-4">
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:StudioDescription input field -->
+                <label class="form-label">Studio description</label><span class="text-danger">*</span>
+                <textarea class="form-control" placeholder="Studio Description" formControlName="studioDesc"></textarea>
+                <div
+                  *ngIf="validator['studioDesc'].invalid &&  (isSubmitted || validator['studioDesc'].dirty) || validator['studioDesc'].touched">
+                  <span class="text-danger" *ngIf="validator['studioDesc'].errors?.['required']">This field is
+                    required*</span>
+                  <span class="text-danger" *ngIf="(validator['studioDesc'].errors?.['maxlength'])">Studio description
+                    must be
+                    less than 250
+                    characters*</span>
+                </div>
+                <!-- End:StudioDescription input field -->
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:StudioEquipment input field -->
+                <label class="form-label">Hardware and equipment details</label><span class="text-danger">*</span>
+                <textarea class="form-control" placeholder="Hardware & Equipment"
+                  formControlName="studioEquipment"></textarea>
+                <div
+                  *ngIf="validator['studioEquipment'].invalid &&  (isSubmitted || validator['studioEquipment'].dirty) || validator['studioEquipment'].touched">
+                  <span class="text-danger" *ngIf="validator['studioEquipment'].errors?.['required']">This field is
+                    required*</span>
+                  <span class="text-danger" *ngIf="(validator['studioEquipment'].errors?.['maxlength'])">Hardware and
+                    Equipment details must be
+                    less than 1000
+                    characters*</span>
+                </div>
+                <!-- End:StudioEquipment input field -->
+              </div>
+            </div>
+          </div>
+          <!-- End:Second-row of input field -->
+
+          <!-- Start:Third-row of input field -->
+          <div class="row mb-4">
+            <div class="col-lg-4 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:Country input field -->
+                <label class="form-label">Select Country</label><span class="text-danger">*</span>
+                <div for="state-file" class=" w-100">
+                  <div class="form-control  d-flex justify-content-between">
+                      <img src="../../../assets/images/Frame 5.png" alt="">
+                  </div>
+              </div>
+                <!-- End:Country input field -->
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:State input field -->
+                <label class="form-label">Select City</label><span class="text-danger">*</span>
+                <select class="form-select" aria-label="Default select example" formControlName="city">
+                  <option selected>Select City</option>
+              </select>
+              <div
+                  *ngIf="validator['city'].invalid &&  (isSubmitted || validator['city'].dirty) || validator['city'].touched">
+                  <span class="text-danger" *ngIf="validator['city'].errors?.['required']">This field is
+                    required*</span>
+                </div>
+                <!-- End:State input field -->
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:City input field -->
+                <label class="form-label">Select State</label><span class="text-danger">*</span>
+                <select class="form-select" aria-label="Default select example" formControlName="state">
+                  <option selected>Select State</option>
+              </select>
+              <div
+              *ngIf="validator['state'].invalid &&  (isSubmitted || validator['state'].dirty) || validator['state'].touched">
+              <span class="text-danger" *ngIf="validator['state'].errors?.['required']">This field is
+                required*</span>
+            </div>
+                <!-- End:City input field -->
+              </div>
+            </div>
+          </div>
+          <!-- End:third-row of input field -->
+
+
+          <div class="mb-4">
+            <button type="submit" class="btn btn-primary me-3">Submit</button>
+            <button type="btn" class="btn btn-secondary" (click)="reset()">Cancle</button>
+          </div>
+        </form>
+      </div>
+      <!-- End:Form With Validation -->
+    </div>
+    <!--End: Studio-Details-Form -->
+  </div>
+</section>
