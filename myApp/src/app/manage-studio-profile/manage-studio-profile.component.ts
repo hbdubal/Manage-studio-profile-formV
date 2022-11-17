@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { City, Country, ManageStudioProfile, State } from './manage-studio-profile.model';
@@ -22,7 +23,7 @@ export class ManageStudioProfileComponent implements OnInit {
    * 
    * @param fb 
    */
-  constructor(private fb: FormBuilder,public managestudioprofileservice:ManageStudioProfileService) {
+  constructor(private fb: FormBuilder, public managestudioprofileservice:ManageStudioProfileService, public http:HttpClient) {
     this.managestudioprofile = [];
     this.studioProfileForm = this.fb.group(
       {
@@ -30,6 +31,7 @@ export class ManageStudioProfileComponent implements OnInit {
         studioAddress: ['', [Validators.required, Validators.maxLength(250), Validators.pattern('^[A-Za-z0-9 ()&]*$')]],
         studioDesc: ['', [Validators.required, Validators.maxLength(250)]],
         studioEquipment: ['', [Validators.required, Validators.maxLength(1000), Validators.pattern('^[a-zA-Z0-9]*$')]],
+        country:['',Validators.required],
         state:['',[Validators.required]],
         city:['', [Validators.required]]
       }
@@ -52,22 +54,15 @@ export class ManageStudioProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getCountryData();
+    this.getCountryData();
   }
 
-  /**
-   * Validation FormControl
-   */
-  get validator(): { [key: string]: AbstractControl<any> } {
-    return this.studioProfileForm.controls;
+  getCountryData() {
+    this.managestudioprofileservice.getCountries().subscribe((data) => {
+      this.countries = data;
+      console.log(this.countries);
+    });
   }
-  // getCountryData() {
-  //   this.managestudioprofileservice.getCountriesList().subscribe((data) => {
-  //     this.countries = data;
-  //     console.log(this.countries);
-  //   });
-  // }
-
 
   getStatebyCountry(event: any) {
     const countryId = event.target.value
@@ -87,6 +82,13 @@ export class ManageStudioProfileComponent implements OnInit {
       this.allCity = res.filter((data: any) => data.stateId == stateId);
       console.log(this.allCity);
     })
+  }
+
+  /**
+   * Validation FormControl
+   */
+  get validator(): { [key: string]: AbstractControl<any> } {
+    return this.studioProfileForm.controls;
   }
 }
 
