@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ManageStudioProfile } from './manage-studio-profile.model';
+import { City, Country, ManageStudioProfile, State } from './manage-studio-profile.model';
+import { ManageStudioProfileService } from './manage-studio-profile.service';
 
 @Component({
   selector: 'app-manage-studio-profile',
@@ -13,12 +14,15 @@ export class ManageStudioProfileComponent implements OnInit {
   public managestudioprofile!: ManageStudioProfile[];
   public isSubmitted: boolean = false;
 
+  public countries!: Country[];
+  public allState!: State[];
+  public allCity!: City[];
 
   /**
    * 
    * @param fb 
    */
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,public managestudioprofileservice:ManageStudioProfileService) {
     this.managestudioprofile = [];
     this.studioProfileForm = this.fb.group(
       {
@@ -48,6 +52,7 @@ export class ManageStudioProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.getCountryData();
   }
 
   /**
@@ -56,4 +61,32 @@ export class ManageStudioProfileComponent implements OnInit {
   get validator(): { [key: string]: AbstractControl<any> } {
     return this.studioProfileForm.controls;
   }
+  // getCountryData() {
+  //   this.managestudioprofileservice.getCountriesList().subscribe((data) => {
+  //     this.countries = data;
+  //     console.log(this.countries);
+  //   });
+  // }
+
+
+  getStatebyCountry(event: any) {
+    const countryId = event.target.value
+    console.log(countryId);
+    this.managestudioprofileservice.getStatesByCountry().subscribe((res: any) => {
+      console.log(res);
+      this.allState = res.filter((data: any) => data.countryId == countryId);
+      console.log(this.allState);
+    })
+  }
+
+  getCityByStateId(event: any) {
+    const stateId = event.target.value
+    console.log(stateId);
+    this.managestudioprofileservice.getCityByState().subscribe((res: any) => {
+      console.log(res);
+      this.allCity = res.filter((data: any) => data.stateId == stateId);
+      console.log(this.allCity);
+    })
+  }
 }
+

@@ -7,7 +7,7 @@ export interface ManageStudioProfile {
     city?:string;
 }
 export class Country {
-    id?: number;
+    id!: number;
     name!: string;
 }
 
