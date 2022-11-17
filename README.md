@@ -1,1 +1,1 @@
-# Drag-Drop_ImgUpload
+# Manage studio Profile Form Validation
