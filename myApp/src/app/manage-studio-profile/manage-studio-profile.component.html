@@ -92,45 +92,52 @@
               <div class="form-outline">
                 <!-- Start:Country input field -->
                 <label class="form-label">Select Country</label><span class="text-danger">*</span>
-                <select class="form-select" aria-label="Default select example" formControlName="country">
+                <select class="form-select" aria-label="Default select example" formControlName="country"
+                  (change)="getStatebyCountry($event)">
                   <option selected>Select Country</option>
-              </select>
+                  <option *ngFor="let data of countries" [value]="data.id">{{data.name}}</option>
+                </select>
                 <!-- <div for="state-file" class=" w-100">
                   <div class="form-control  d-flex justify-content-between">
                       <img src="../../../assets/images/Frame 5.png" alt="">
                   </div> -->
-              <!-- </div> -->
+                <!-- </div> -->
                 <!-- End:Country input field -->
               </div>
             </div>
+
+            <div class="col-lg-4 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:City input field -->
+                <label class="form-label">Select State</label><span class="text-danger">*</span>
+                <select class="form-select" aria-label="Default select example" formControlName="state"
+                  (change)="getCityByStateId($event)">
+                  <option selected>Select State</option>
+                  <option *ngFor="let data of allState" [value]="data.id">{{data.name}}</option>
+                </select>
+                <div
+                  *ngIf="validator['state'].invalid &&  (isSubmitted || validator['state'].dirty) || validator['state'].touched">
+                  <span class="text-danger" *ngIf="validator['state'].errors?.['required']">This field is
+                    required*</span>
+                </div>
+                <!-- End:City input field -->
+              </div>
+            </div>
+
             <div class="col-lg-4 col-sm-12">
               <div class="form-outline">
                 <!-- Start:State input field -->
                 <label class="form-label">Select City</label><span class="text-danger">*</span>
                 <select class="form-select" aria-label="Default select example" formControlName="city">
                   <option selected>Select City</option>
-              </select>
-              <div
+                  <option *ngFor="let data of allCity">{{data.cityName}}</option>
+                </select>
+                <div
                   *ngIf="validator['city'].invalid &&  (isSubmitted || validator['city'].dirty) || validator['city'].touched">
                   <span class="text-danger" *ngIf="validator['city'].errors?.['required']">This field is
                     required*</span>
                 </div>
                 <!-- End:State input field -->
-              </div>
-            </div>
-            <div class="col-lg-4 col-sm-12">
-              <div class="form-outline">
-                <!-- Start:City input field -->
-                <label class="form-label">Select State</label><span class="text-danger">*</span>
-                <select class="form-select" aria-label="Default select example" formControlName="state">
-                  <option selected>Select State</option>
-              </select>
-              <div
-              *ngIf="validator['state'].invalid &&  (isSubmitted || validator['state'].dirty) || validator['state'].touched">
-              <span class="text-danger" *ngIf="validator['state'].errors?.['required']">This field is
-                required*</span>
-            </div>
-                <!-- End:City input field -->
               </div>
             </div>
           </div>

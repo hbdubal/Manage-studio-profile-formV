@@ -57,6 +57,9 @@ export class ManageStudioProfileComponent implements OnInit {
     this.getCountryData();
   }
 
+  /**
+   * Get Country Data
+   */
   getCountryData() {
     this.managestudioprofileservice.getCountries().subscribe((data) => {
       this.countries = data;
@@ -64,6 +67,11 @@ export class ManageStudioProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param event 
+   * Get State data by Country
+   */
   getStatebyCountry(event: any) {
     const countryId = event.target.value
     console.log(countryId);
@@ -74,6 +82,11 @@ export class ManageStudioProfileComponent implements OnInit {
     })
   }
 
+  /**
+   * 
+   * @param event 
+   * Get City Data By State
+   */
   getCityByStateId(event: any) {
     const stateId = event.target.value
     console.log(stateId);

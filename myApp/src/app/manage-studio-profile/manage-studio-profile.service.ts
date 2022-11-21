@@ -11,13 +11,26 @@ export class ManageStudioProfileService {
 
   constructor(private http:HttpClient) { }
   
+  /**
+   * 
+   * @returns CountryList
+   */
   getCountries(): Observable<Country[]> {
     return this.http.get<Country[]>(this.countryUrl);
   }
+
+  /**
+   * 
+   * @returns StateList By Country 
+   */
   getStatesByCountry(): Observable<State[]> {
     return this.http.get<State[]>(this.stateUrl);
   }
 
+  /**
+   * 
+   * @returns CityList By State
+   */
   getCityByState(): Observable<City[]> {
     return this.http.get<City[]>(this.cityUrl);
   }
