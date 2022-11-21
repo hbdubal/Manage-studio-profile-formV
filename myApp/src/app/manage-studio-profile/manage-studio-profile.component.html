@@ -143,6 +143,67 @@
           </div>
           <!-- End:third-row of input field -->
 
+          <!-- Start:Fourth-row of input field -->
+          <div class="row mb-4">
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-outline">
+                <div class="row">
+                  <!-- from -->
+                  <div class="col-12 col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold" for="days">From <span class="text-danger">*</span>
+                      </label>
+                      <select id="days" class="form-select" (change)="selectChangeHandler($event)">
+                        <option selected>From</option>
+                        <option *ngFor="let weekday of weekdays" [value]="weekday">{{weekday}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- to -->
+                  <div class="col-12 col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold" for="days">To <span class="text-danger">*</span>
+                      </label>
+                      <select id="days" class="form-select">
+                        <option selected>To</option>
+                        <option *ngFor="let weekday of weekdays" [value]="weekday">{{weekday}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End:State input field -->
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-outline">
+                <!-- Start:State input field -->
+                <div class="row">
+                  <!-- from -->
+                  <div class="col-12 col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold" for="time">From <span class="text-danger">*</span>
+                      </label>
+                      <select id="time" class="form-select">
+                        <option selected>From</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- to -->
+                  <div class="col-12 col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold" for="time">To <span class="text-danger">*</span>
+                      </label>
+                      <select id="time" class="form-select">
+                        <option selected>To</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End:Fourth-row of input field -->
+
 
           <div class="mb-4">
             <button type="submit" class="btn btn-primary me-3">Submit</button>

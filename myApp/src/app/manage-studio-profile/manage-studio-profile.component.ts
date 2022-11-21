@@ -18,12 +18,16 @@ export class ManageStudioProfileComponent implements OnInit {
   public countries!: Country[];
   public allState!: State[];
   public allCity!: City[];
+ 
+  public weekdays=["Monday","Tuseday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+  selected = "----";
+  selectedDay: string = '';
 
   /**
    * 
    * @param fb 
    */
-  constructor(private fb: FormBuilder, public managestudioprofileservice:ManageStudioProfileService, public http:HttpClient) {
+  constructor(private fb: FormBuilder, public managestudioprofileservice: ManageStudioProfileService, public http: HttpClient) {
     this.managestudioprofile = [];
     this.studioProfileForm = this.fb.group(
       {
@@ -31,9 +35,9 @@ export class ManageStudioProfileComponent implements OnInit {
         studioAddress: ['', [Validators.required, Validators.maxLength(250), Validators.pattern('^[A-Za-z0-9 ()&]*$')]],
         studioDesc: ['', [Validators.required, Validators.maxLength(250)]],
         studioEquipment: ['', [Validators.required, Validators.maxLength(1000), Validators.pattern('^[a-zA-Z0-9]*$')]],
-        country:['',Validators.required],
-        state:['',[Validators.required]],
-        city:['', [Validators.required]]
+        country: ['', Validators.required],
+        state: ['', [Validators.required]],
+        city: ['', [Validators.required]]
       }
     )
   }
@@ -43,7 +47,7 @@ export class ManageStudioProfileComponent implements OnInit {
    */
   submit() {
     this.isSubmitted = true;
-    console.log(this.studioProfileForm); 
+    console.log(this.studioProfileForm);
   }
 
   /**
@@ -55,7 +59,7 @@ export class ManageStudioProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCountryData();
-  }
+   }
 
   /**
    * Get Country Data
@@ -63,7 +67,6 @@ export class ManageStudioProfileComponent implements OnInit {
   getCountryData() {
     this.managestudioprofileservice.getCountries().subscribe((data) => {
       this.countries = data;
-      console.log(this.countries);
     });
   }
 
@@ -74,11 +77,8 @@ export class ManageStudioProfileComponent implements OnInit {
    */
   getStatebyCountry(event: any) {
     const countryId = event.target.value
-    console.log(countryId);
     this.managestudioprofileservice.getStatesByCountry().subscribe((res: any) => {
-      console.log(res);
       this.allState = res.filter((data: any) => data.countryId == countryId);
-      console.log(this.allState);
     })
   }
 
@@ -89,11 +89,8 @@ export class ManageStudioProfileComponent implements OnInit {
    */
   getCityByStateId(event: any) {
     const stateId = event.target.value
-    console.log(stateId);
     this.managestudioprofileservice.getCityByState().subscribe((res: any) => {
-      console.log(res);
       this.allCity = res.filter((data: any) => data.stateId == stateId);
-      console.log(this.allCity);
     })
   }
 
@@ -102,6 +99,15 @@ export class ManageStudioProfileComponent implements OnInit {
    */
   get validator(): { [key: string]: AbstractControl<any> } {
     return this.studioProfileForm.controls;
+  }
+
+  update(e: any) {
+    this.selected=e.target.value;
+  }
+  selectChangeHandler (event: any) {
+    //update the ui
+    this.selectedDay = event.target.value;
+    console.log(this.selectedDay); 
   }
 }
 
