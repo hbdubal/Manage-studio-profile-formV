@@ -32,16 +32,25 @@ export class ManageStudioProfileComponent implements OnInit {
     this.studioProfileForm = this.fb.group(
       {
         studioName: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('^[A-Za-z0-9 _@$!&]*$')]],
-        studioAddress: ['', [Validators.required, Validators.maxLength(250), Validators.pattern('^[A-Za-z0-9 ()&]*$')]],
+        studioAddress: ['', [Validators.required, Validators.maxLength(250), Validators.pattern('^[A-Za-z0-9 ,-.()&]*$')]],
         studioDesc: ['', [Validators.required, Validators.maxLength(250)]],
-        studioEquipment: ['', [Validators.required, Validators.maxLength(1000), Validators.pattern('^[a-zA-Z0-9]*$')]],
+        studioEquipment: ['', [Validators.required, Validators.maxLength(1000), Validators.pattern('^[A-Za-z0-9 ,-.()&]*$')]],
         country: ['', Validators.required],
         state: ['', [Validators.required]],
         city: ['', [Validators.required]]
       }
     )
   }
-
+  tags = [
+    { id: 1, name: 'Laravel' },
+    { id: 2, name: 'Codeigniter' },
+    { id: 3, name: 'React' },
+    { id: 4, name: 'PHP' },
+    { id: 5, name: 'Angular' },
+    { id: 6, name: 'Vue' },
+    { id: 7, name: 'JQuery' },
+    { id: 8, name: 'Javascript' },
+  ];
   /**
    * OnClick Submit(SubmitData)
    */

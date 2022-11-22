@@ -14,15 +14,18 @@
               <div class="form-outline">
                 <!-- Start:StudioName input field -->
                 <label class="form-label">Studio name</label><span class="text-danger">*</span>
-                <input type="text" class="form-control" formControlName="studioName" placeholder="Studio Name" />
+                <input type="text" class="form-control" formControlName="studioName"
+                  [ngClass]="{'is-invalid': validator['studioName'].invalid &&  (isSubmitted || validator['studioName'].dirty || validator['studioName'].touched), 'is-valid': validator['studioName'].valid &&  (isSubmitted || validator['studioName'].dirty || validator['studioName'].touched)}"
+                  placeholder="Studio Name" />
                 <div
-                  *ngIf="validator['studioName'].invalid &&  (isSubmitted || validator['studioName'].dirty) || validator['studioName'].touched">
+                  *ngIf="validator['studioName'].invalid &&  (isSubmitted || validator['studioName'].dirty || validator['studioName'].touched)">
                   <span class="text-danger" *ngIf="validator['studioName'].errors?.['required']">This field is
-                    required*</span>
+                    required</span>
                   <span class="text-danger" *ngIf="(validator['studioName'].errors?.['maxlength'])">Studio name must be
                     less than 30
-                    characters*</span>
-                  <span class="text-danger" *ngIf="validator['studioName'].errors?.['pattern']">valid name*</span>
+                    characters</span>
+                  <span class="text-danger" *ngIf="validator['studioName'].errors?.['pattern']">Enter alphanumeric and @$!_&
+                    only</span>
                 </div>
                 <!-- End:StudioName input field -->
               </div>
@@ -31,16 +34,17 @@
               <div class="form-outline">
                 <!-- Start:Address input field -->
                 <label class="form-label">Address</label><span class="text-danger">*</span>
-                <input type="text" class="form-control" formControlName="studioAddress" placeholder="Address" />
+                <input type="text" class="form-control" formControlName="studioAddress" placeholder="Address" [ngClass]="{'is-invalid': validator['studioAddress'].invalid &&  (isSubmitted || validator['studioAddress'].dirty || validator['studioAddress'].touched), 'is-valid': validator['studioAddress'].valid &&  (isSubmitted || validator['studioAddress'].dirty || validator['studioAddress'].touched)}"/>
                 <div
-                  *ngIf="validator['studioAddress'].invalid &&  (isSubmitted || validator['studioAddress'].dirty) || validator['studioAddress'].touched">
+                  *ngIf="validator['studioAddress'].invalid &&  (isSubmitted || validator['studioAddress'].dirty || validator['studioAddress'].touched)">
                   <span class="text-danger" *ngIf="validator['studioAddress'].errors?.['required']">This field is
-                    required*</span>
+                    required</span>
                   <span class="text-danger" *ngIf="(validator['studioAddress'].errors?.['maxlength'])">Studio name must
                     be
                     less than 250
-                    characters*</span>
-                  <span class="text-danger" *ngIf="validator['studioAddress'].errors?.['pattern']">valid name*</span>
+                    characters</span>
+                  <span class="text-danger" *ngIf="validator['studioAddress'].errors?.['pattern']">Enter alphanumeric and (),.-&
+                    only</span>
                 </div>
                 <!-- End:Address input field -->
               </div>
@@ -52,15 +56,15 @@
               <div class="form-outline">
                 <!-- Start:StudioDescription input field -->
                 <label class="form-label">Studio description</label><span class="text-danger">*</span>
-                <textarea class="form-control" placeholder="Studio Description" formControlName="studioDesc"></textarea>
+                <textarea class="form-control" placeholder="Studio Description" formControlName="studioDesc" [ngClass]="{'is-invalid': validator['studioDesc'].invalid &&  (isSubmitted || validator['studioDesc'].dirty || validator['studioDesc'].touched), 'is-valid': validator['studioDesc'].valid &&  (isSubmitted || validator['studioDesc'].dirty || validator['studioDesc'].touched)}"></textarea>
                 <div
-                  *ngIf="validator['studioDesc'].invalid &&  (isSubmitted || validator['studioDesc'].dirty) || validator['studioDesc'].touched">
+                  *ngIf="validator['studioDesc'].invalid &&  (isSubmitted || validator['studioDesc'].dirty || validator['studioDesc'].touched)">
                   <span class="text-danger" *ngIf="validator['studioDesc'].errors?.['required']">This field is
-                    required*</span>
+                    required</span>
                   <span class="text-danger" *ngIf="(validator['studioDesc'].errors?.['maxlength'])">Studio description
                     must be
                     less than 250
-                    characters*</span>
+                    characters</span>
                 </div>
                 <!-- End:StudioDescription input field -->
               </div>
@@ -70,15 +74,17 @@
                 <!-- Start:StudioEquipment input field -->
                 <label class="form-label">Hardware and equipment details</label><span class="text-danger">*</span>
                 <textarea class="form-control" placeholder="Hardware & Equipment"
-                  formControlName="studioEquipment"></textarea>
+                  formControlName="studioEquipment" [ngClass]="{'is-invalid': validator['studioEquipment'].invalid &&  (isSubmitted || validator['studioEquipment'].dirty || validator['studioEquipment'].touched), 'is-valid': validator['studioEquipment'].valid &&  (isSubmitted || validator['studioEquipment'].dirty || validator['studioEquipment'].touched)}"></textarea>
                 <div
                   *ngIf="validator['studioEquipment'].invalid &&  (isSubmitted || validator['studioEquipment'].dirty) || validator['studioEquipment'].touched">
                   <span class="text-danger" *ngIf="validator['studioEquipment'].errors?.['required']">This field is
-                    required*</span>
+                    required</span>
                   <span class="text-danger" *ngIf="(validator['studioEquipment'].errors?.['maxlength'])">Hardware and
                     Equipment details must be
                     less than 1000
-                    characters*</span>
+                    characters</span>
+                    <span class="text-danger" *ngIf="validator['studioEquipment'].errors?.['pattern']">Enter alphanumeric and (),.-&
+                      only</span>
                 </div>
                 <!-- End:StudioEquipment input field -->
               </div>
@@ -93,10 +99,15 @@
                 <!-- Start:Country input field -->
                 <label class="form-label">Select Country</label><span class="text-danger">*</span>
                 <select class="form-select" aria-label="Default select example" formControlName="country"
-                  (change)="getStatebyCountry($event)">
+                  (change)="getStatebyCountry($event)" [ngClass]="{'is-invalid': validator['country'].invalid &&  (isSubmitted || validator['country'].dirty || validator['country'].touched), 'is-valid': validator['country'].valid &&  (isSubmitted || validator['country'].dirty || validator['country'].touched)}">
                   <option selected>Select Country</option>
                   <option *ngFor="let data of countries" [value]="data.id">{{data.name}}</option>
                 </select>
+                <div
+                *ngIf="validator['country'].invalid &&  (isSubmitted || validator['country'].dirty || validator['country'].touched)">
+                <span class="text-danger" *ngIf="validator['country'].errors?.['required']">This field is
+                  required*</span>
+                  </div>
                 <!-- <div for="state-file" class=" w-100">
                   <div class="form-control  d-flex justify-content-between">
                       <img src="../../../assets/images/Frame 5.png" alt="">
@@ -110,16 +121,19 @@
               <div class="form-outline">
                 <!-- Start:City input field -->
                 <label class="form-label">Select State</label><span class="text-danger">*</span>
+                <!-- <ng-select [items]="tags" bindLabel="name" placeholder="Select Tags" (change)="getCityByStateId($event)" [ngClass]="{'is-invalid': validator['state'].invalid &&  (isSubmitted || validator['state'].dirty || validator['state'].touched), 'is-valid': validator['state'].valid &&  (isSubmitted || validator['state'].dirty || validator['state'].touched)}"
+                    formControlName="state">
+                </ng-select> -->
                 <select class="form-select" aria-label="Default select example" formControlName="state"
-                  (change)="getCityByStateId($event)">
+                  (change)="getCityByStateId($event)" [ngClass]="{'is-invalid': validator['state'].invalid &&  (isSubmitted || validator['state'].dirty || validator['state'].touched), 'is-valid': validator['state'].valid &&  (isSubmitted || validator['state'].dirty || validator['state'].touched)}">
                   <option selected>Select State</option>
                   <option *ngFor="let data of allState" [value]="data.id">{{data.name}}</option>
                 </select>
                 <div
-                  *ngIf="validator['state'].invalid &&  (isSubmitted || validator['state'].dirty) || validator['state'].touched">
-                  <span class="text-danger" *ngIf="validator['state'].errors?.['required']">This field is
-                    required*</span>
-                </div>
+                *ngIf="validator['state'].invalid &&  (isSubmitted || validator['state'].dirty) || validator['state'].touched">
+                <span class="text-danger" *ngIf="validator['state'].errors?.['required']">This field is
+                  required*</span>
+                  </div>
                 <!-- End:City input field -->
               </div>
             </div>
@@ -128,7 +142,7 @@
               <div class="form-outline">
                 <!-- Start:State input field -->
                 <label class="form-label">Select City</label><span class="text-danger">*</span>
-                <select class="form-select" aria-label="Default select example" formControlName="city">
+                <select class="form-select" aria-label="Default select example" formControlName="city"  [ngClass]="{'is-invalid': validator['city'].invalid &&  (isSubmitted || validator['city'].dirty || validator['city'].touched), 'is-valid': validator['city'].valid &&  (isSubmitted || validator['city'].dirty || validator['city'].touched)}">
                   <option selected>Select City</option>
                   <option *ngFor="let data of allCity">{{data.cityName}}</option>
                 </select>
@@ -136,7 +150,7 @@
                   *ngIf="validator['city'].invalid &&  (isSubmitted || validator['city'].dirty) || validator['city'].touched">
                   <span class="text-danger" *ngIf="validator['city'].errors?.['required']">This field is
                     required*</span>
-                </div>
+                    </div>
                 <!-- End:State input field -->
               </div>
             </div>

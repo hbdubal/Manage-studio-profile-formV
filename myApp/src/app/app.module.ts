@@ -7,18 +7,19 @@ import { ManageStudioProfileComponent } from './manage-studio-profile/manage-stu
 import { ReactiveFormsModule } from '@angular/forms';
 import { ManageStudioProfileService } from './manage-studio-profile/manage-studio-profile.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
-    AppComponent,
+   AppComponent,
     ManageStudioProfileComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgSelectModule
   ],
   providers: [ManageStudioProfileService],
   bootstrap: [AppComponent]

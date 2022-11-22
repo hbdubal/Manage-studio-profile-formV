@@ -1,5 +1,25 @@
-.studio-details
-{
+.studio-details {
     border: 1px solid gray;
     padding: 30px;
+}
+
+.was-validated .form-control:invalid:focus,
+.form-control.is-invalid:focus {
+    border-color: #F03E3E;
+}
+
+.was-validated .form-control:valid:focus,
+.form-control.is-valid:focus {
+    border-color: #198754;  
+}
+
+.was-validated .form-control:invalid:focus,
+.form-control.is-invalid:focus,
+.was-validated .form-control:valid:focus,
+.form-control.is-valid:focus,
+.form-select:focus,
+.was-validated .form-select:invalid:focus, .form-select.is-invalid:focus,
+.form-control:focus,
+.was-validated .form-select:valid:focus, .form-select.is-valid:focus {
+    box-shadow: none;
 }
