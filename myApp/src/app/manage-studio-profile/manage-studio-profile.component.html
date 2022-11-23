@@ -106,7 +106,7 @@
                 <div
                 *ngIf="validator['country'].invalid &&  (isSubmitted || validator['country'].dirty || validator['country'].touched)">
                 <span class="text-danger" *ngIf="validator['country'].errors?.['required']">This field is
-                  required*</span>
+                  required</span>
                   </div>
                 <!-- <div for="state-file" class=" w-100">
                   <div class="form-control  d-flex justify-content-between">
@@ -132,7 +132,7 @@
                 <div
                 *ngIf="validator['state'].invalid &&  (isSubmitted || validator['state'].dirty) || validator['state'].touched">
                 <span class="text-danger" *ngIf="validator['state'].errors?.['required']">This field is
-                  required*</span>
+                  required</span>
                   </div>
                 <!-- End:City input field -->
               </div>
@@ -149,7 +149,7 @@
                 <div
                   *ngIf="validator['city'].invalid &&  (isSubmitted || validator['city'].dirty) || validator['city'].touched">
                   <span class="text-danger" *ngIf="validator['city'].errors?.['required']">This field is
-                    required*</span>
+                    required</span>
                     </div>
                 <!-- End:State input field -->
               </div>
@@ -162,28 +162,38 @@
             <div class="col-lg-6 col-sm-12">
               <div class="form-outline">
                 <div class="row">
-                  <!-- from -->
+                  <!--Start: from days to days -->
                   <div class="col-12 col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label fw-bold" for="days">From <span class="text-danger">*</span>
+                      <label class="form-label fw-bold">From <span class="text-danger">*</span>
                       </label>
-                      <select id="days" class="form-select" (change)="selectChangeHandler($event)">
-                        <option selected>From</option>
-                        <option *ngFor="let weekday of weekdays" [value]="weekday">{{weekday}}</option>
+                      <select class="form-select" (change)="onweekDays1($event)" formControlName="weekdays1">
+                        <option value="" disabled selected hidden>From</option>
+                        <option *ngFor="let weekday1 of weekdays1" [value]="weekday1.dayId">{{weekday1.day}}</option>
                       </select>
+                      <div
+                      *ngIf="validator['weekdays1'].invalid &&  (isSubmitted || validator['weekdays1'].dirty) || validator['weekdays1'].touched">
+                      <span class="text-danger" *ngIf="validator['weekdays1'].errors?.['required']">This field is
+                        required</span>
+                        </div>
                     </div>
                   </div>
-                  <!-- to -->
                   <div class="col-12 col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label fw-bold" for="days">To <span class="text-danger">*</span>
+                      <label class="form-label fw-bold">To <span class="text-danger">*</span>
                       </label>
-                      <select id="days" class="form-select">
-                        <option selected>To</option>
-                        <option *ngFor="let weekday of weekdays" [value]="weekday">{{weekday}}</option>
+                      <select class="form-select" (change)="onweekDays2($event)" formControlName="weekdays2">
+                        <option value="" disabled selected hidden>To</option>
+                        <option *ngFor="let weekday2 of weekdays2" [value]="weekday2.dayId" [disabled]="weekdays1Id == weekday2.dayId">{{weekday2.day}}</option>
                       </select>
+                      <div
+                      *ngIf="validator['weekdays2'].invalid &&  (isSubmitted || validator['weekdays2'].dirty) || validator['weekdays2'].touched">
+                      <span class="text-danger" *ngIf="validator['weekdays2'].errors?.['required']">This field is
+                        required</span>
+                        </div>
                     </div>
                   </div>
+                     <!--End: from days to days -->
                 </div>
               </div>
               <!-- End:State input field -->
@@ -198,7 +208,7 @@
                       <label class="form-label fw-bold" for="time">From <span class="text-danger">*</span>
                       </label>
                       <select id="time" class="form-select">
-                        <option selected>From</option>
+                        <option value="" disabled selected hidden>From</option>
                       </select>
                     </div>
                   </div>
@@ -208,7 +218,7 @@
                       <label class="form-label fw-bold" for="time">To <span class="text-danger">*</span>
                       </label>
                       <select id="time" class="form-select">
-                        <option selected>To</option>
+                        <option value="" disabled selected hidden>To</option>
                       </select>
                     </div>
                   </div>
@@ -230,3 +240,7 @@
     <!--End: Studio-Details-Form -->
   </div>
 </section>
+
+
+
+   

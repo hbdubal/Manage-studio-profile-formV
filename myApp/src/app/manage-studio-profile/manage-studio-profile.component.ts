@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { City, Country, ManageStudioProfile, State } from './manage-studio-profile.model';
 import { ManageStudioProfileService } from './manage-studio-profile.service';
@@ -18,16 +18,18 @@ export class ManageStudioProfileComponent implements OnInit {
   public countries!: Country[];
   public allState!: State[];
   public allCity!: City[];
- 
-  public weekdays=["Monday","Tuseday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-  selected = "----";
-  selectedDay: string = '';
+  public weekdays1:any=[];
+  public weekdays2:any=[];
+  public weekdays1Id:any;
+  public weekdays2Id:any;
+  // public disabled=false;
 
+  public selected: any;
   /**
    * 
    * @param fb 
    */
-  constructor(private fb: FormBuilder, public managestudioprofileservice: ManageStudioProfileService, public http: HttpClient) {
+  constructor(private fb: FormBuilder, public managestudioprofileservice: ManageStudioProfileService) {
     this.managestudioprofile = [];
     this.studioProfileForm = this.fb.group(
       {
@@ -37,20 +39,13 @@ export class ManageStudioProfileComponent implements OnInit {
         studioEquipment: ['', [Validators.required, Validators.maxLength(1000), Validators.pattern('^[A-Za-z0-9 ,-.()&]*$')]],
         country: ['', Validators.required],
         state: ['', [Validators.required]],
-        city: ['', [Validators.required]]
+        city: ['', [Validators.required]],
+        weekdays1:['',[Validators.required]],
+        weekdays2:['',[Validators.required]]
       }
     )
   }
-  tags = [
-    { id: 1, name: 'Laravel' },
-    { id: 2, name: 'Codeigniter' },
-    { id: 3, name: 'React' },
-    { id: 4, name: 'PHP' },
-    { id: 5, name: 'Angular' },
-    { id: 6, name: 'Vue' },
-    { id: 7, name: 'JQuery' },
-    { id: 8, name: 'Javascript' },
-  ];
+
   /**
    * OnClick Submit(SubmitData)
    */
@@ -68,7 +63,9 @@ export class ManageStudioProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCountryData();
-   }
+    this.getalldays1();
+    this.getalldays2();
+  }
 
   /**
    * Get Country Data
@@ -111,12 +108,26 @@ export class ManageStudioProfileComponent implements OnInit {
   }
 
   update(e: any) {
-    this.selected=e.target.value;
+    this.selected = e.target.value;
   }
-  selectChangeHandler (event: any) {
-    //update the ui
-    this.selectedDay = event.target.value;
-    console.log(this.selectedDay); 
-  }
-}
 
+  getalldays1(){
+    this.managestudioprofileservice.getallWeekdays1().subscribe((data)=>{
+      this.weekdays1 = data;
+    })
+  }
+  getalldays2(){
+    this.managestudioprofileservice.getallWeekdays2().subscribe((data)=>{
+      this.weekdays2 = data;
+    })
+  }
+
+  onweekDays1(event:any){
+    console.log(event);
+    this.weekdays1Id= Number(event.target.value); 
+  }
+
+  onweekDays2(event:any){
+    this.weekdays2Id = Number(event.target.value);
+    }
+}
