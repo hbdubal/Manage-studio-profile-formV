@@ -7,18 +7,18 @@ export interface ManageStudioProfile {
     city?:string;
 }
 export class Country {
-    id!: number;
-    name!: string;
+    countryId!: number;
+    countryName!: string;
 }
 
 export class State {
-    id!: number;
-    name!: string;
+    stateId!: number;
+    stateName!: string;
     countryId!: number
 }
 
 export class City {
-    id!: number;
+    cityId!: number;
     cityName!: string;
     stateId!: number;
 }

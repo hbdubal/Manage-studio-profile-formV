@@ -41,7 +41,9 @@ export class ManageStudioProfileComponent implements OnInit {
         state: ['', [Validators.required]],
         city: ['', [Validators.required]],
         weekdays1:['',[Validators.required]],
-        weekdays2:['',[Validators.required]]
+        weekdays2:['',[Validators.required]],
+        hours1:['',[Validators.required]],
+        hours2:['',[Validators.required]]
       }
     )
   }
@@ -122,12 +124,12 @@ export class ManageStudioProfileComponent implements OnInit {
     })
   }
 
-  onweekDays1(event:any){
-    console.log(event);
-    this.weekdays1Id= Number(event.target.value); 
+  onweekDays1(weekday1Id:number){
+this.weekdays1Id = weekday1Id;
+  
   }
 
-  onweekDays2(event:any){
-    this.weekdays2Id = Number(event.target.value);
+  onweekDays2(weekday2Id:number){
+    this.weekdays2Id = weekday2Id;
     }
 }

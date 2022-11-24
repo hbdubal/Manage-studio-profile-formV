@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { City, Country, State } from './manage-studio-profile.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ManageStudioProfileService {
@@ -10,16 +11,21 @@ export class ManageStudioProfileService {
   private cityUrl: string = 'http://localhost:3000/cities';
   private weekdays1Url:string = ' http://localhost:3000/weekdays1';
   private weekdays2Url:string = ' http://localhost:3000/weekdays2';
+  public baseUrl:string;
+
+  constructor(private http:HttpClient) { 
+    this.baseUrl=environment.baseUrl
+  }
 
 
-  constructor(private http:HttpClient) { }
   
   /**
    * 
    * @returns CountryList
    */
   getCountries(): Observable<Country[]> {
-    return this.http.get<Country[]>(this.countryUrl);
+    const url=this.baseUrl+"location/countries"
+    return this.http.get<Country[]>(url);
   }
 
   /**
@@ -27,7 +33,8 @@ export class ManageStudioProfileService {
    * @returns StateList By Country 
    */
   getStatesByCountry(): Observable<State[]> {
-    return this.http.get<State[]>(this.stateUrl);
+    const url=this.baseUrl+"location/states"
+    return this.http.get<State[]>(url);
   }
 
   /**
@@ -35,7 +42,8 @@ export class ManageStudioProfileService {
    * @returns CityList By State
    */
   getCityByState(): Observable<City[]> {
-    return this.http.get<City[]>(this.cityUrl);
+    const url=this.baseUrl+"location/cities"
+    return this.http.get<City[]>(url);
   }
 
   getallWeekdays1():Observable<any>{

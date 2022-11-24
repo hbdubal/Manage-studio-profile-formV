@@ -101,7 +101,7 @@
                 <select class="form-select" aria-label="Default select example" formControlName="country"
                   (change)="getStatebyCountry($event)" [ngClass]="{'is-invalid': validator['country'].invalid &&  (isSubmitted || validator['country'].dirty || validator['country'].touched), 'is-valid': validator['country'].valid &&  (isSubmitted || validator['country'].dirty || validator['country'].touched)}">
                   <option selected>Select Country</option>
-                  <option *ngFor="let data of countries" [value]="data.id">{{data.name}}</option>
+                  <option *ngFor="let data of countries" [value]="data.countryId">{{data.countryName}}</option>
                 </select>
                 <div
                 *ngIf="validator['country'].invalid &&  (isSubmitted || validator['country'].dirty || validator['country'].touched)">
@@ -127,7 +127,7 @@
                 <select class="form-select" aria-label="Default select example" formControlName="state"
                   (change)="getCityByStateId($event)" [ngClass]="{'is-invalid': validator['state'].invalid &&  (isSubmitted || validator['state'].dirty || validator['state'].touched), 'is-valid': validator['state'].valid &&  (isSubmitted || validator['state'].dirty || validator['state'].touched)}">
                   <option selected>Select State</option>
-                  <option *ngFor="let data of allState" [value]="data.id">{{data.name}}</option>
+                  <option *ngFor="let data of allState" [value]="data.stateId">{{data.stateName}}</option>
                 </select>
                 <div
                 *ngIf="validator['state'].invalid &&  (isSubmitted || validator['state'].dirty) || validator['state'].touched">
@@ -144,7 +144,7 @@
                 <label class="form-label">Select City</label><span class="text-danger">*</span>
                 <select class="form-select" aria-label="Default select example" formControlName="city"  [ngClass]="{'is-invalid': validator['city'].invalid &&  (isSubmitted || validator['city'].dirty || validator['city'].touched), 'is-valid': validator['city'].valid &&  (isSubmitted || validator['city'].dirty || validator['city'].touched)}">
                   <option selected>Select City</option>
-                  <option *ngFor="let data of allCity">{{data.cityName}}</option>
+                  <option *ngFor="let data of allCity" [value]="data.cityId">{{data.cityName}}</option>
                 </select>
                 <div
                   *ngIf="validator['city'].invalid &&  (isSubmitted || validator['city'].dirty) || validator['city'].touched">
@@ -160,6 +160,7 @@
           <!-- Start:Fourth-row of input field -->
           <div class="row mb-4">
             <div class="col-lg-6 col-sm-12">
+              <!-- Start:Weekdays-Dropdown input field -->
               <div class="form-outline">
                 <div class="row">
                   <!--Start: from days to days -->
@@ -167,10 +168,9 @@
                     <div class="mb-3">
                       <label class="form-label fw-bold">From <span class="text-danger">*</span>
                       </label>
-                      <select class="form-select" (change)="onweekDays1($event)" formControlName="weekdays1">
-                        <option value="" disabled selected hidden>From</option>
-                        <option *ngFor="let weekday1 of weekdays1" [value]="weekday1.dayId">{{weekday1.day}}</option>
-                      </select>
+                      <ng-select bindLabel="name" placeholder="From"  (change)="onweekDays1($event)" formControlName="weekdays1">
+                        <ng-option *ngFor="let weekday1 of weekdays1" [value]="weekday1.dayId" >{{weekday1.day}}</ng-option>
+                    </ng-select>
                       <div
                       *ngIf="validator['weekdays1'].invalid &&  (isSubmitted || validator['weekdays1'].dirty) || validator['weekdays1'].touched">
                       <span class="text-danger" *ngIf="validator['weekdays1'].errors?.['required']">This field is
@@ -182,10 +182,9 @@
                     <div class="mb-3">
                       <label class="form-label fw-bold">To <span class="text-danger">*</span>
                       </label>
-                      <select class="form-select" (change)="onweekDays2($event)" formControlName="weekdays2">
-                        <option value="" disabled selected hidden>To</option>
-                        <option *ngFor="let weekday2 of weekdays2" [value]="weekday2.dayId" [disabled]="weekdays1Id == weekday2.dayId">{{weekday2.day}}</option>
-                      </select>
+                      <ng-select bindLabel="name" placeholder="To"  (change)="onweekDays2($event)" formControlName="weekdays2">
+                          <ng-option *ngFor="let weekday2 of weekdays2" [value]="weekday2.dayId" [disabled]="weekdays1Id == weekday2.dayId">{{weekday2.day}}</ng-option>
+                      </ng-select>
                       <div
                       *ngIf="validator['weekdays2'].invalid &&  (isSubmitted || validator['weekdays2'].dirty) || validator['weekdays2'].touched">
                       <span class="text-danger" *ngIf="validator['weekdays2'].errors?.['required']">This field is
@@ -196,33 +195,34 @@
                      <!--End: from days to days -->
                 </div>
               </div>
-              <!-- End:State input field -->
+              <!-- End:Weekdays-Dropdown input field -->
             </div>
             <div class="col-lg-6 col-sm-12">
               <div class="form-outline">
-                <!-- Start:State input field -->
+                <!-- Start:Hours-Dropdown input field -->
                 <div class="row">
-                  <!-- from -->
+                  <!--Start: from hours to hours -->
                   <div class="col-12 col-lg-6">
                     <div class="mb-3">
                       <label class="form-label fw-bold" for="time">From <span class="text-danger">*</span>
                       </label>
-                      <select id="time" class="form-select">
-                        <option value="" disabled selected hidden>From</option>
-                      </select>
+                      <ng-select bindLabel="name" placeholder="From" formControlName="hours1">
+                        <ng-option *ngFor="let weekday1 of weekdays1" [value]="weekday1.dayId" >{{weekday1.day}}</ng-option>
+                      </ng-select>
                     </div>
                   </div>
-                  <!-- to -->
                   <div class="col-12 col-lg-6">
                     <div class="mb-3">
                       <label class="form-label fw-bold" for="time">To <span class="text-danger">*</span>
                       </label>
-                      <select id="time" class="form-select">
-                        <option value="" disabled selected hidden>To</option>
-                      </select>
+                      <ng-select bindLabel="name" placeholder="From" formControlName="hours2">
+                        <ng-option *ngFor="let weekday1 of weekdays1" [value]="weekday1.dayId" >{{weekday1.day}}</ng-option>
+                    </ng-select>
                     </div>
                   </div>
+                  <!--End: from hours to hours -->
                 </div>
+                <!-- End:Hours-Dropdown input field -->
               </div>
             </div>
           </div>
