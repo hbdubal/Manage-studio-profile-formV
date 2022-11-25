@@ -168,7 +168,7 @@
                     <div class="mb-3">
                       <label class="form-label fw-bold">From <span class="text-danger">*</span>
                       </label>
-                      <ng-select bindLabel="name" placeholder="From"  (change)="onweekDays1($event)" formControlName="weekdays1">
+                      <ng-select bindLabel="name" placeholder="From" (change)="onweekDays1($event)" formControlName="weekdays1" [ngClass]="{'is-invalid': validator['weekdays1'].invalid &&  (isSubmitted || validator['weekdays1'].dirty || validator['weekdays1'].touched), 'is-valid': validator['weekdays1'].valid &&  (isSubmitted || validator['weekdays1'].dirty || validator['weekdays1'].touched)}">
                         <ng-option *ngFor="let weekday1 of weekdays1" [value]="weekday1.dayId" >{{weekday1.day}}</ng-option>
                     </ng-select>
                       <div
@@ -182,7 +182,7 @@
                     <div class="mb-3">
                       <label class="form-label fw-bold">To <span class="text-danger">*</span>
                       </label>
-                      <ng-select bindLabel="name" placeholder="To"  (change)="onweekDays2($event)" formControlName="weekdays2">
+                      <ng-select bindLabel="name" placeholder="To" formControlName="weekdays2" [ngClass]="{'is-invalid': validator['weekdays2'].invalid &&  (isSubmitted || validator['weekdays2'].dirty || validator['weekdays2'].touched), 'is-valid': validator['weekdays2'].valid &&  (isSubmitted || validator['weekdays2'].dirty || validator['weekdays2'].touched)}">
                           <ng-option *ngFor="let weekday2 of weekdays2" [value]="weekday2.dayId" [disabled]="weekdays1Id == weekday2.dayId">{{weekday2.day}}</ng-option>
                       </ng-select>
                       <div
@@ -206,18 +206,28 @@
                     <div class="mb-3">
                       <label class="form-label fw-bold" for="time">From <span class="text-danger">*</span>
                       </label>
-                      <ng-select bindLabel="name" placeholder="From" formControlName="hours1">
-                        <ng-option *ngFor="let weekday1 of weekdays1" [value]="weekday1.dayId" >{{weekday1.day}}</ng-option>
+                      <ng-select bindLabel="name" placeholder="From" formControlName="hours1" (change)="onhours1($event)" [ngClass]="{'is-invalid': validator['hours1'].invalid &&  (isSubmitted || validator['hours1'].dirty || validator['hours1'].touched), 'is-valid': validator['hours1'].valid &&  (isSubmitted || validator['hours1'].dirty || validator['hours1'].touched)}">
+                        <ng-option *ngFor="let time1 of hours" [value]="time1">{{time1}}</ng-option>
                       </ng-select>
+                      <div
+                      *ngIf="validator['hours1'].invalid &&  (isSubmitted || validator['hours1'].dirty) || validator['hours1'].touched">
+                      <span class="text-danger" *ngIf="validator['hours1'].errors?.['required']">This field is
+                        required</span>
+                        </div>
                     </div>
                   </div>
                   <div class="col-12 col-lg-6">
                     <div class="mb-3">
                       <label class="form-label fw-bold" for="time">To <span class="text-danger">*</span>
                       </label>
-                      <ng-select bindLabel="name" placeholder="From" formControlName="hours2">
-                        <ng-option *ngFor="let weekday1 of weekdays1" [value]="weekday1.dayId" >{{weekday1.day}}</ng-option>
+                      <ng-select bindLabel="name" placeholder="From" formControlName="hours2" [ngClass]="{'is-invalid': validator['hours2'].invalid &&  (isSubmitted || validator['hours2'].dirty || validator['hours2'].touched), 'is-valid': validator['hours2'].valid &&  (isSubmitted || validator['hours2'].dirty || validator['hours2'].touched)}">
+                        <ng-option *ngFor="let time2 of hours" [value]="time2" [disabled]="hoursValue == time2">{{time2}}</ng-option>
                     </ng-select>
+                    <div
+                    *ngIf="validator['hours2'].invalid &&  (isSubmitted || validator['hours2'].dirty) || validator['hours2'].touched">
+                    <span class="text-danger" *ngIf="validator['hours2'].errors?.['required']">This field is
+                      required</span>
+                      </div>
                     </div>
                   </div>
                   <!--End: from hours to hours -->
@@ -231,7 +241,7 @@
 
           <div class="mb-4">
             <button type="submit" class="btn btn-primary me-3">Submit</button>
-            <button type="btn" class="btn btn-secondary" (click)="reset()">Cancle</button>
+            <button type="btn" class="btn btn-secondary" (click)="reset()">Cancel</button>
           </div>
         </form>
       </div>

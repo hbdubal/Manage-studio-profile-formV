@@ -18,19 +18,23 @@ export class ManageStudioProfileComponent implements OnInit {
   public countries!: Country[];
   public allState!: State[];
   public allCity!: City[];
-  public weekdays1:any=[];
-  public weekdays2:any=[];
-  public weekdays1Id:any;
-  public weekdays2Id:any;
-  // public disabled=false;
+  public weekdays1: any = [];
+  public weekdays2: any = [];
+  public weekdays1Id: any;
+  public weekdays2Id: any;
+  public disabled = "false";
+  public i: number = 1;
+  public hours: number[];
+  public hoursValue!: number;
 
-  public selected: any;
+  
   /**
    * 
    * @param fb 
    */
   constructor(private fb: FormBuilder, public managestudioprofileservice: ManageStudioProfileService) {
     this.managestudioprofile = [];
+    this.hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
     this.studioProfileForm = this.fb.group(
       {
         studioName: ['', [Validators.required, Validators.maxLength(30), Validators.pattern('^[A-Za-z0-9 _@$!&]*$')]],
@@ -40,10 +44,10 @@ export class ManageStudioProfileComponent implements OnInit {
         country: ['', Validators.required],
         state: ['', [Validators.required]],
         city: ['', [Validators.required]],
-        weekdays1:['',[Validators.required]],
-        weekdays2:['',[Validators.required]],
-        hours1:['',[Validators.required]],
-        hours2:['',[Validators.required]]
+        weekdays1: ['', [Validators.required]],
+        weekdays2: ['', [Validators.required]],
+        hours1: ['', [Validators.required]],
+        hours2: ['', [Validators.required]]
       }
     )
   }
@@ -109,27 +113,29 @@ export class ManageStudioProfileComponent implements OnInit {
     return this.studioProfileForm.controls;
   }
 
-  update(e: any) {
-    this.selected = e.target.value;
-  }
-
-  getalldays1(){
-    this.managestudioprofileservice.getallWeekdays1().subscribe((data)=>{
+  /**
+   * Get Days to Days Data
+   */
+  getalldays1() {
+    this.managestudioprofileservice.getallWeekdays1().subscribe((data) => {
       this.weekdays1 = data;
     })
   }
-  getalldays2(){
-    this.managestudioprofileservice.getallWeekdays2().subscribe((data)=>{
+  getalldays2() {
+    this.managestudioprofileservice.getallWeekdays2().subscribe((data) => {
       this.weekdays2 = data;
     })
   }
-
-  onweekDays1(weekday1Id:number){
-this.weekdays1Id = weekday1Id;
-  
+  onweekDays1(weekday1Id: number) {
+    this.weekdays1Id = weekday1Id;
   }
 
-  onweekDays2(weekday2Id:number){
-    this.weekdays2Id = weekday2Id;
-    }
+  /**
+   * 
+   * @param hours 
+   * Get Time to Time Data
+   */
+  onhours1(hours: any) {
+    this.hoursValue = hours;
+  }
 }
